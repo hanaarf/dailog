@@ -1,0 +1,204 @@
+:root {
+  --primary: #697565;
+  --secondary: #3C3D37;
+  --cream: #ECDFCC;
+  --black: #181C14;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar-dailog nav {
+  font-family: "Poppins", sans-serif;
+}
+.navbar-dailog nav .container-fluid .navbar-brand {
+  font-family: "Kaushan Script", cursive;
+  font-weight: 600;
+  font-size: 27px;
+  color: var(--primary);
+}
+.navbar-dailog nav .container-fluid form input {
+  background-color: #F3F3F6;
+  border: 1px solid rgb(245, 242, 242);
+  padding: 10px;
+  border-radius: 50px;
+  font-size: 14px;
+}
+.navbar-dailog nav .container-fluid form span {
+  background-color: var(--primary);
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-dailog nav .container-fluid form span i {
+  font-size: 12px;
+}
+.navbar-dailog nav .container-fluid .collapse .navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+.navbar-dailog nav .container-fluid .collapse .navbar-nav li a i {
+  font-size: 17px;
+  color: var(--primary);
+}
+.navbar-dailog nav .container-fluid .collapse .navbar-nav .dropdown button img {
+  border: 1px solid rgb(188, 185, 185);
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.navbar-dailog nav .dropdown-toggle {
+  color: var(--primary);
+}
+
+.main .thumbnail {
+  display: flex;
+  justify-content: space-between;
+}
+.main .thumbnail .img {
+  position: absolute;
+  margin-left: 570px;
+  margin-top: 65px;
+}
+.main .thumbnail .img img {
+  width: 550px;
+  max-width: 551px;
+  max-height: 420px;
+  margin-bottom: 28px;
+}
+.main .thumbnail .img .act {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  justify-content: end;
+}
+.main .thumbnail .img .act p {
+  margin: 0;
+  margin-right: 15px;
+  cursor: pointer;
+}
+.main .thumbnail .img .act .fa-heart {
+  cursor: pointer;
+  color: #FF7F7F;
+}
+.main .thumbnail .img .act .fa-comment {
+  cursor: pointer;
+  color: #B0B0B0;
+}
+.main .thumbnail .judul {
+  justify-content: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 680px;
+  height: 550px;
+  background-color: #F5F9F3;
+  padding-left: 120px;
+}
+.main .thumbnail .judul h1 {
+  width: 70%;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+.main .thumbnail .judul h1 span {
+  margin-left: 5px;
+}
+.main .thumbnail .judul p {
+  margin-bottom: 7px;
+  font-weight: 400;
+  color: var(--secondary);
+}
+.main .thumbnail .judul .btn-copy {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  background-color: #fff;
+  color: #666;
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 24%;
+}
+.main .thumbnail .judul .btn-copy:hover {
+  background-color: #f0f0f0;
+}
+.main .thumbnail .judul .btn-copy .fa-link {
+  margin-right: 8px;
+}
+.main .thumbnail .judul p:nth-of-type(2) {
+  font-size: 12px;
+  font-weight: 300;
+  margin: 0;
+  color: #666;
+}
+.main .content {
+  padding-left: 350px;
+  padding-right: 350px;
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+.main .content .isi p {
+  line-height: 42px;
+}
+
+.modal-footer .input-container {
+  display: flex;
+  width: 100%;
+}
+.modal-footer .input-container .form-control {
+  flex-grow: 1;
+  width: 95%;
+  border-radius: 50px;
+}
+.modal-footer .input-container button {
+  flex-grow: 0;
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  border: none;
+  color: white;
+}
+
+footer {
+  margin-top: 30px;
+  font-family: "Poppins", serif;
+  border-top: 1px solid #F0F0F0;
+}
+footer .container .row .menu {
+  margin-top: 10px;
+}
+footer .container .row .menu ul {
+  gap: 20px;
+}
+footer .container .row .menu ul li a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 15px;
+}
+footer .container .row .icon {
+  margin-top: 10px;
+}
+footer .container .row .icon ul li i {
+  color: var(--secondary);
+  font-size: 15px;
+}
+footer .container .row:nth-child(2) .menu {
+  margin-top: 10px;
+}
+footer .container .row:nth-child(2) .menu ul li a {
+  text-decoration: none;
+  color: #a0999d;
+  font-weight: 500;
+  font-size: 12px;
+}/*# sourceMappingURL=show.css.map */

@@ -1,0 +1,347 @@
+:root {
+  --primary: #697565;
+  --secondary: #3C3D37;
+  --cream: #ECDFCC;
+  --black: #181C14;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar-dailog nav {
+  font-family: "Poppins", sans-serif;
+}
+.navbar-dailog nav .container-fluid .navbar-brand {
+  font-family: "Kaushan Script", cursive;
+  font-weight: 600;
+  font-size: 27px;
+  color: var(--primary);
+}
+.navbar-dailog nav .container-fluid form input {
+  background-color: #F3F3F6;
+  border: 1px solid rgb(245, 242, 242);
+  padding: 10px;
+  border-radius: 50px;
+  font-size: 14px;
+}
+.navbar-dailog nav .container-fluid form span {
+  background-color: var(--primary);
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-dailog nav .container-fluid form span i {
+  font-size: 12px;
+}
+.navbar-dailog nav .container-fluid .collapse .navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+.navbar-dailog nav .container-fluid .collapse .navbar-nav li a i {
+  font-size: 17px;
+  color: var(--primary);
+}
+.navbar-dailog nav .container-fluid .collapse .navbar-nav .dropdown button img {
+  border: 1px solid rgb(188, 185, 185);
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.navbar-dailog nav .dropdown-toggle {
+  color: var(--primary);
+}
+
+.main {
+  margin-top: 70px;
+}
+.main .container {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+}
+.main .container .left {
+  border-right: 1px solid #DBD9D9;
+  flex: 2;
+  padding: 25px;
+  overflow: auto;
+  height: 250vh;
+}
+.main .container .left::-webkit-scrollbar {
+  width: 2px;
+}
+.main .container .left::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.main .container .left::-webkit-scrollbar-thumb {
+  background-color: #494646;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+.main .container .left::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+.main .container .left .klik ul {
+  display: flex;
+  gap: 80px;
+}
+.main .container .left .klik ul li {
+  list-style-type: none;
+}
+.main .container .left .klik ul li a {
+  text-decoration: none;
+  color: #a2a1b1;
+  font-size: 15px;
+}
+.main .container .left .klik ul li a.active {
+  background-color: #d9d9d9;
+  padding: 4px 16px;
+  border-radius: 20px;
+}
+.main .container .left a {
+  text-decoration: none;
+}
+.main .container .left a .kartu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 20px;
+  gap: 40px;
+  cursor: pointer;
+}
+.main .container .left a .kartu .left-content {
+  flex: 1;
+}
+.main .container .left a .kartu .left-content .user {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 10px;
+}
+.main .container .left a .kartu .left-content .user p {
+  margin: 0;
+}
+.main .container .left a .kartu .left-content .user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+}
+.main .container .left a .kartu .left-content .user .fa-heart {
+  color: #ed7171;
+}
+.main .container .left a .kartu .left-content .user .fa-comment {
+  color: #B0B0B0;
+}
+.main .container .left a .kartu .left-content h1 {
+  font-size: 17px;
+  color: var(--secondary);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.main .container .left a .kartu .left-content p {
+  font-size: 12px;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+.main .container .left a .kartu .left-content .userr {
+  display: flex;
+  justify-content: space-between;
+}
+.main .container .left a .kartu .left-content .userr .fa-calendar {
+  color: var(--secondary);
+}
+.main .container .left a .kartu .left-content .userr .islike {
+  color: #ed7171;
+}
+.main .container .left a .kartu .left-content .userr .nolike {
+  color: var(--primary);
+}
+.main .container .left a .kartu .left-content .userr .fa-comment {
+  color: #B0B0B0;
+}
+.main .container .left a .kartu .right-content {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.main .container .left a .kartu .right-content img {
+  width: 100%;
+  max-width: 250px;
+  height: 150px;
+  border-radius: 8px;
+}
+.main .container .left a hr {
+  color: var(--primary);
+}
+.main .container .right {
+  flex: 1;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  position: sticky;
+  top: 0;
+  height: 30vh;
+}
+.main .container .right h5 {
+  color: var(--secondary);
+  font-weight: 500;
+  font-size: 18px;
+}
+.main .container .right .kartu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px;
+  gap: 40px;
+}
+.main .container .right .kartu .left-content {
+  flex: 1;
+}
+.main .container .right .kartu .left-content .user {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 10px;
+}
+.main .container .right .kartu .left-content .user p {
+  margin: 0;
+}
+.main .container .right .kartu .left-content .user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+}
+.main .container .right .kartu .left-content h1 {
+  font-size: 17px;
+  color: var(--secondary);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.main .container .right .kartu .left-content p {
+  font-size: 12px;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+.main .container .right .follow {
+  padding: 2px;
+  display: flex;
+  width: 100%;
+  padding: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+.main .container .right .follow .user {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 10px;
+}
+.main .container .right .follow .user p {
+  margin: 0;
+  font-size: 15px;
+}
+.main .container .right .follow .user img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+}
+.main .container .right .follow a {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--primary);
+  width: 80px;
+  height: 30px;
+  border-radius: 20px;
+  border: 1px solid var(--secondary);
+}
+@media (max-width: 600px) {
+  .main .container .right {
+    display: none;
+  }
+  .main .container .left {
+    flex: 1;
+  }
+}
+
+.modal-footer .input-container {
+  display: flex;
+  width: 100%;
+}
+.modal-footer .input-container .form-control {
+  flex-grow: 1;
+  width: 95%;
+  border-radius: 50px;
+}
+.modal-footer .input-container button {
+  flex-grow: 0;
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  border: none;
+  color: white;
+}
+
+footer {
+  margin-top: 30px;
+  font-family: "Poppins", serif;
+  border-top: 1px solid #F0F0F0;
+}
+footer .container .row .menu {
+  margin-top: 10px;
+}
+footer .container .row .menu ul {
+  gap: 20px;
+}
+footer .container .row .menu ul li a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 15px;
+}
+footer .container .row .icon {
+  margin-top: 10px;
+}
+footer .container .row .icon ul li i {
+  color: var(--secondary);
+  font-size: 15px;
+}
+footer .container .row:nth-child(2) .menu {
+  margin-top: 10px;
+}
+footer .container .row:nth-child(2) .menu ul li a {
+  text-decoration: none;
+  color: #a0999d;
+  font-weight: 500;
+  font-size: 12px;
+}/*# sourceMappingURL=dailog.css.map */

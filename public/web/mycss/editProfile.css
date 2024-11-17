@@ -1,0 +1,178 @@
+:root {
+  --primary: #697565;
+  --secondary: #3C3D37;
+  --cream: #ECDFCC;
+  --black: #181C14;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar-dailog nav {
+  font-family: "Poppins", sans-serif;
+}
+.navbar-dailog nav .container-fluid .navbar-brand {
+  font-family: "Kaushan Script", cursive;
+  font-weight: 600;
+  font-size: 27px;
+  color: var(--primary);
+}
+.navbar-dailog nav .container-fluid form input {
+  background-color: #F3F3F6;
+  border: 1px solid rgb(245, 242, 242);
+  padding: 10px;
+  border-radius: 50px;
+  font-size: 14px;
+}
+.navbar-dailog nav .container-fluid form span {
+  background-color: var(--primary);
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-dailog nav .container-fluid form span i {
+  font-size: 12px;
+}
+.navbar-dailog nav .container-fluid .collapse .navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+.navbar-dailog nav .container-fluid .collapse .navbar-nav li a i {
+  font-size: 17px;
+  color: var(--primary);
+}
+.navbar-dailog nav .container-fluid .collapse .navbar-nav .dropdown button img {
+  border: 1px solid rgb(188, 185, 185);
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.navbar-dailog nav .dropdown-toggle {
+  color: var(--primary);
+}
+
+.container-fluidd {
+  height: 142px;
+  background-color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  padding: 30px 60px;
+}
+.main h2 {
+  font-weight: 650;
+  font-size: 19px;
+  color: rgba(47, 47, 48, 0.8549019608);
+}
+.main form .img {
+  margin-top: 20px;
+  padding: 5px 20px;
+  border: 2px solid #E4EAE1;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.main form .img .image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+  height: 63px;
+  width: 63px;
+  padding: 4px;
+}
+.main form .img .button a {
+  background-color: var(--cream);
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+.main form .img .button a:hover {
+  background-color: var(--primary);
+}
+.main form .img .button a:not(:hover) {
+  color: white;
+}
+.main form .form-group {
+  margin-bottom: 20px;
+}
+.main form .form-group label {
+  font-weight: 500;
+  font-size: 15px;
+  color: #2f2f30;
+  display: block;
+  margin-bottom: 5px;
+}
+.main form .form-group input[type=text] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #E4EAE1;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+.main form .form-group input[type=password] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #E4EAE1;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+.main form .button .save {
+  background-color: var(--cream);
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+.main form .button .save:hover {
+  background-color: var(--primary);
+}
+.main form .button .cancel {
+  background-color: #F9F9F9;
+  color: #1A1A1A;
+  border: 2px solid var(--primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+.main form .button .cancel:hover {
+  background-color: #F0F3F6;
+}
+
+footer {
+  margin-top: 30px;
+  font-family: "Poppins", serif;
+  border-top: 1px solid #F0F0F0;
+}
+footer .container .row .menu {
+  margin-top: 10px;
+}
+footer .container .row .menu ul {
+  gap: 20px;
+}
+footer .container .row .menu ul li a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 15px;
+}
+footer .container .row .icon {
+  margin-top: 10px;
+}
+footer .container .row .icon ul li i {
+  color: var(--secondary);
+  font-size: 15px;
+}
+footer .container .row:nth-child(2) .menu {
+  margin-top: 10px;
+}
+footer .container .row:nth-child(2) .menu ul li a {
+  text-decoration: none;
+  color: #a0999d;
+  font-weight: 500;
+  font-size: 12px;
+}/*# sourceMappingURL=editProfile.css.map */
