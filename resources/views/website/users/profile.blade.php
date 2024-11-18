@@ -33,8 +33,7 @@
             <a href="{{ route('profile.edit', $user->id) }}" class="btn btn rounded-pill fw-semibold" type="submit">Edit
                 Profile</a>
             @else
-            <a href="#" class="btn btn rounded-pill fw-semibold"
-                type="submit">Follow</a>
+            <a href="#" class="btn btn rounded-pill fw-semibold" type="submit">Follow</a>
             @endif
         </div>
         <br>
@@ -49,54 +48,128 @@
             <div class="klik">
                 <ul>
                     @if (Auth::id() === $user->id)
-                    <li><a href="" class="active">All post</a></li>
-                    <li><a href="">Liked</a></li>
-                    <li><a href="">Mark</a></li>
-                    <li><a href="">Draft</a></li>
+                    <li><a href="#" id="all-posts-btn" class="active">All Post</a></li>
+                    <li><a href="#" id="drafts-btn">Draft</a></li>
                     @else
-                    <li><a href="" class="active">All post</a></li>
+                    <li><a href="#" id="all-posts-btn" class="active">All Post</a></li>
                     @endif
                 </ul>
             </div>
             <hr style="color: #a1a3b6;">
-            @foreach ($post as $row)
-            <a href="{{ route('show.post', $row->id) }}" class="blog">
-                <div class="kartu">
-                    <div class="left-content">
-                        <div class="user">
-                            @if($row->user->image)
-                            <img src="{{ asset('storage/' . $row->user->image) }}" alt="User Image" width="35"
-                                height="35" class="rounded-circle">
-                            @else
-                            <img class="rounded-circle" width="35"
-                                src="https://ui-avatars.com/api/?name={{ urlencode($row->user->name) }}"
-                                alt="User Avatar">
+
+            
+            <!-- Foreach Post -->
+            <div class="post">
+                @foreach ($post as $row)
+                <div class="blog">
+                    <div class="kartu">
+                        <div class="left-content">
+                            <div class="user">
+                                @if($row->user->image)
+                                <img src="{{ asset('storage/' . $row->user->image) }}" alt="User Image" width="35"
+                                    height="35" class="rounded-circle">
+                                @else
+                                <img class="rounded-circle" width="35"
+                                    src="https://ui-avatars.com/api/?name={{ urlencode($row->user->name) }}"
+                                    alt="User Avatar">
+                                @endif
+                                <p>by {{ $row->user->name }}</p>
+                            </div>
+                            <h1>{{ $row->title }}</h1>
+                            <p>{{ strip_tags($row->content) }}</p>
+                            <div class="userr">
+                                <div class="tanggal d-flex gap-2">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    <p>{{ $row->created_at->format('d F Y') }}</p>
+                                </div>
+                                <div class="like d-flex gap-2">
+                                    {{-- <i class="fa-solid fa-heart islike" style="display: none; cursor: pointer;"></i> --}}
+                                    <i class="fa-regular fa-heart nolike" style="cursor: pointer;"></i>
+                                    <p>{{ $row->likes->count() }}</p>
+                                    <i class="fa-solid fa-comment"></i>
+                                    <p>{{ $row->comments->count() }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-content">
+                            <img src="{{ asset('storage/' . $row->thumbnail) }}" alt="Placeholder Image"
+                                class="img-fluid">
+
+                            @if (Auth::id() === $user->id)
+                            <a href="{{ route('user.edit.post', $row->id) }}"><i class="fa-solid fa-pen edit-icon"></i></a>
+
+                            <form action="{{ route('destroy.post', $row->id) }}" method="POST" class="d-inline"
+                                onsubmit="return confirmDelete()">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-btn"
+                                    style="background: none; border: none; padding: 0;">
+                                    <i class="fa-solid fa-trash hapus-icon"></i>
+                                </button>
+                            </form>
                             @endif
-                            <p>by {{ $row->user->name }}</p>
                         </div>
-                        <h1>{{ $row->title }}</h1>
-                        <p>{{ strip_tags($row->content) }}</p>
-                        <div class="userr">
-                            <div class="tanggal d-flex gap-2">
-                                <i class="fa-regular fa-calendar"></i>
-                                <p>{{ $row->created_at->format('d F Y') }}</p>
-                            </div>
-                            <div class="like d-flex gap-2">
-                                {{-- <i class="fa-solid fa-heart islike" style="display: none; cursor: pointer;"></i> --}}
-                                <i class="fa-regular fa-heart nolike" style="cursor: pointer;"></i>
-                                <p>{{ $row->likes->count() }}</p>
-                                <i class="fa-solid fa-comment"></i>
-                                <p>{{ $row->comments->count() }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-content">
-                        <img src="{{ asset('storage/' . $row->thumbnail) }}" alt="Placeholder Image" class="img-fluid">
                     </div>
                 </div>
                 <hr>
-            </a>
-            @endforeach
+                @endforeach
+            </div>
+
+            <!-- Foreach Draft -->
+            <div class="draft" style="display: none;">
+                @foreach ($draft as $row)
+                <div class="blog">
+                    <div class="kartu">
+                        <div class="left-content">
+                            <div class="user">
+                                @if($row->user->image)
+                                <img src="{{ asset('storage/' . $row->user->image) }}" alt="User Image" width="35"
+                                    height="35" class="rounded-circle">
+                                @else
+                                <img class="rounded-circle" width="35"
+                                    src="https://ui-avatars.com/api/?name={{ urlencode($row->user->name) }}"
+                                    alt="User Avatar">
+                                @endif
+                                <p>by {{ $row->user->name }}</p>
+                            </div>
+                            <h1>{{ $row->title }}</h1>
+                            <p>{{ strip_tags($row->content) }}</p>
+                            <div class="userr">
+                                <div class="tanggal d-flex gap-2">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    <p>{{ $row->created_at->format('d F Y') }}</p>
+                                </div>
+                                <div class="like d-flex gap-2">
+                                    {{-- <i class="fa-solid fa-heart islike" style="display: none; cursor: pointer;"></i> --}}
+                                    <i class="fa-regular fa-heart nolike" style="cursor: pointer;"></i>
+                                    <p>{{ $row->likes->count() }}</p>
+                                    <i class="fa-solid fa-comment"></i>
+                                    <p>{{ $row->comments->count() }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-content">
+                            <img src="{{ asset('storage/' . $row->thumbnail) }}" alt="Placeholder Image"
+                                class="img-fluid">
+                            @if (Auth::id() === $user->id)
+                            <a href="{{ route('user.edit.post', $row->id) }}"><i class="fa-solid fa-pen edit-icon"></i></a>
+
+                            <form action="{{ route('destroy.post', $row->id) }}" method="POST" class="d-inline"
+                                onsubmit="return confirmDelete()">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-btn"
+                                    style="background: none; border: none; padding: 0;">
+                                    <i class="fa-solid fa-trash hapus-icon"></i>
+                                </button>
+                            </form>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                @endforeach
+            </div>
 
         </div>
         <div class="right">
@@ -174,4 +247,39 @@
 @endsection
 
 @section('script')
+<script>
+    function confirmDelete() {
+        return confirm("Apakah Anda yakin ingin menghapus post ini? Gambar juga akan dihapus.");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const allPostsBtn = document.getElementById("all-posts-btn");
+        const draftsBtn = document.getElementById("drafts-btn");
+        const postContainer = document.querySelector(".post");
+        const draftContainer = document.querySelector(".draft");
+
+        // Fungsi untuk menampilkan All Posts
+        allPostsBtn.addEventListener("click", function (e) {
+            e.preventDefault(); // Mencegah reload halaman
+            postContainer.style.display = "block";
+            draftContainer.style.display = "none";
+
+            // Update class aktif
+            allPostsBtn.classList.add("active");
+            draftsBtn.classList.remove("active");
+        });
+
+        // Fungsi untuk menampilkan Drafts
+        draftsBtn.addEventListener("click", function (e) {
+            e.preventDefault(); // Mencegah reload halaman
+            postContainer.style.display = "none";
+            draftContainer.style.display = "block";
+
+            // Update class aktif
+            draftsBtn.classList.add("active");
+            allPostsBtn.classList.remove("active");
+        });
+    });
+
+</script>
 @endsection

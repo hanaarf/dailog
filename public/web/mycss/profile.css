@@ -162,10 +162,10 @@
   padding: 4px 16px;
   border-radius: 20px;
 }
-.main .container .left a {
+.main .container .left .blog {
   text-decoration: none;
 }
-.main .container .left a .kartu {
+.main .container .left .blog .kartu {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -174,38 +174,38 @@
   gap: 40px;
   cursor: pointer;
 }
-.main .container .left a .kartu .left-content {
+.main .container .left .blog .kartu .left-content {
   flex: 1;
 }
-.main .container .left a .kartu .left-content .user {
+.main .container .left .blog .kartu .left-content .user {
   display: flex;
   gap: 10px;
   align-items: center;
   justify-content: start;
   margin-bottom: 10px;
 }
-.main .container .left a .kartu .left-content .user p {
+.main .container .left .blog .kartu .left-content .user p {
   margin: 0;
 }
-.main .container .left a .kartu .left-content .user img {
+.main .container .left .blog .kartu .left-content .user img {
   width: 30px;
   height: 30px;
   border-radius: 50%;
   border: 1px solid var(--primary);
 }
-.main .container .left a .kartu .left-content .user .fa-heart {
+.main .container .left .blog .kartu .left-content .user .fa-heart {
   color: #ed7171;
 }
-.main .container .left a .kartu .left-content .user .fa-comment {
+.main .container .left .blog .kartu .left-content .user .fa-comment {
   color: #B0B0B0;
 }
-.main .container .left a .kartu .left-content h1 {
+.main .container .left .blog .kartu .left-content h1 {
   font-size: 17px;
   color: var(--secondary);
   font-weight: 500;
   margin-bottom: 10px;
 }
-.main .container .left a .kartu .left-content p {
+.main .container .left .blog .kartu .left-content p {
   font-size: 12px;
   margin: 0;
   display: -webkit-box;
@@ -217,34 +217,63 @@
   color: var(--primary);
   margin-bottom: 10px;
 }
-.main .container .left a .kartu .left-content .userr {
+.main .container .left .blog .kartu .left-content .userr {
   display: flex;
   justify-content: space-between;
 }
-.main .container .left a .kartu .left-content .userr .fa-calendar {
+.main .container .left .blog .kartu .left-content .userr .fa-calendar {
   color: var(--secondary);
 }
-.main .container .left a .kartu .left-content .userr .islike {
+.main .container .left .blog .kartu .left-content .userr .islike {
   color: #ed7171;
 }
-.main .container .left a .kartu .left-content .userr .nolike {
+.main .container .left .blog .kartu .left-content .userr .nolike {
   color: var(--primary);
 }
-.main .container .left a .kartu .left-content .userr .fa-comment {
+.main .container .left .blog .kartu .left-content .userr .fa-comment {
   color: #B0B0B0;
 }
-.main .container .left a .kartu .right-content {
+.main .container .left .blog .kartu .right-content {
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  position: relative;
 }
-.main .container .left a .kartu .right-content img {
+.main .container .left .blog .kartu .right-content img {
   width: 100%;
   max-width: 250px;
   height: 150px;
   border-radius: 8px;
 }
-.main .container .left a hr {
+.main .container .left .blog .kartu .right-content:hover .hover-img {
+  opacity: 0.7;
+  filter: blur(1px);
+}
+.main .container .left .blog .kartu .right-content:hover .edit-icon, .main .container .left .blog .kartu .right-content:hover .hapus-icon {
+  opacity: 1;
+}
+.main .container .left .blog .kartu .right-content .edit-icon, .main .container .left .blog .kartu .right-content .hapus-icon {
+  position: absolute;
+  font-size: 12px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background-color: var(--primary);
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main .container .left .blog .kartu .right-content .edit-icon {
+  top: 10px;
+  right: 10px;
+}
+.main .container .left .blog .kartu .right-content .hapus-icon {
+  top: 10px;
+  right: 40px;
+}
+.main .container .left .blog hr {
   color: var(--primary);
 }
 .main .container .right {

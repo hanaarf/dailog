@@ -32,6 +32,10 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
+        if ($post->is_draft == '1' && $post->user_id !== Auth::id()) {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
+        
         $comments = Comment::where('post_id', $id)->orderBy('created_at', 'desc')->get();
         $commentsCount = Comment::where('post_id', $id)->count();
         return view('website.posts.show', compact('post', 'comments', 'commentsCount'));
@@ -45,18 +49,26 @@ class PostController extends Controller
 
     public function upload(Request $request)
     {
-       if ($request->hasFile('upload')) {
+        $request->validate([
+            'upload' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('upload')) {
             $originName = $request->file('upload')->getClientOriginalName();
             $fileName = pathinfo($originName, PATHINFO_FILENAME);
             $extension = $request->file('upload')->getClientOriginalExtension();
             $fileName = $fileName . '_' . time() . '.' . $extension;
 
-            $request->file('upload')->move(public_path('media'), $fileName);
+            // Simpan file ke storage/media
+            $filePath = $request->file('upload')->storeAs('media', $fileName);
 
-            $url = asset('media/' . $fileName);
-            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+            // Generate URL untuk akses file
+            $url = asset('storage/media/' . $fileName);
+
+            return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
         }
     }
+
 
     public function store(Request $request)
     {
@@ -79,6 +91,60 @@ class PostController extends Controller
         ]);
     
         return redirect()->route('index.home')->with('success', 'Post berhasil ditambahkan');
+    }
+
+    public function edit($id)
+    {
+        $post = Post::findOrFail($id); 
+        return view('website.posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+        $userId = Auth::id();
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+        ]);
+
+        // Jika ada thumbnail baru, hapus thumbnail lama
+        if ($request->hasFile('thumbnail')) {
+            if ($post->thumbnail) {
+                Storage::disk('public')->delete($post->thumbnail); 
+            }
+            $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
+        } else {
+            $thumbnailPath = $post->thumbnail; // Tetap gunakan thumbnail lama
+        }
+
+        $isDraft = $request->input('is_draft', $post->is_draft);
+
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'thumbnail' => $thumbnailPath,
+            'is_draft' => $isDraft,
+        ]);
+
+        return redirect()->route('profile.show', $userId)->with('success', 'Post berhasil diperbarui');
+    }
+
+
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $userId = Auth::id();
+
+        if ($post->thumbnail) {
+            Storage::disk('public')->delete($post->thumbnail);
+        }
+
+        $post->delete();
+
+        return redirect()->route('profile.show', $userId)->with('success', 'Post berhasil dihapus');
     }
 
     public function storeComment(Request $request, $postId)

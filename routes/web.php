@@ -64,6 +64,9 @@ Route::prefix('U')->middleware(['auth', 'isUser'])->group(function(){
         Route::get('/create-post', 'create')->name('user.create.post');
         Route::post('/upload-ck', 'upload')->name('user.ckeditor.upload');
         Route::post('/store-post', 'store')->name('user.store.postt');
+        Route::get('/edit-post/{id}', 'edit')->name('user.edit.post');
+        Route::post('/update-post/{id}', 'update')->name('user.update.post');
+        Route::delete('/post/{id}', 'destroy')->name('destroy.post');
         Route::post('/search', 'search')->name('user.search');
         Route::post('/post/{postId}/comment', 'storeComment')->name('comments.store');
     });

@@ -15,9 +15,10 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id); 
         $post = Post::where('user_id', $id)->where('is_draft', 2)->orderBy('created_at', 'desc')->get();
+        $draft = Post::where('user_id', $id)->where('is_draft', 1)->orderBy('created_at', 'desc')->get();
         $randomPost = Post::where('is_draft', '2')->where('user_id', '!=', Auth::id())->inRandomOrder()->limit(2)->get();
         $randomUser = User::where('role', '2')->where('id', '!=', Auth::id())->inRandomOrder()->limit(3)->get();
-        return view('website.users.profile', compact('user', 'post', 'randomPost', 'randomUser')); 
+        return view('website.users.profile', compact('user', 'post', 'randomPost', 'randomUser', 'draft')); 
     }
 
     public function edit($id)
