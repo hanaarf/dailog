@@ -29,7 +29,13 @@
         </div>
 
         <div class="button">
-            <a href="{{ route('profile.edit', $user->id) }}" class="btn btn rounded-pill fw-semibold" type="submit">Edit Profile</a>
+            @if (Auth::id() === $user->id)
+            <a href="{{ route('profile.edit', $user->id) }}" class="btn btn rounded-pill fw-semibold" type="submit">Edit
+                Profile</a>
+            @else
+            <a href="#" class="btn btn rounded-pill fw-semibold"
+                type="submit">Follow</a>
+            @endif
         </div>
         <br>
         <hr style="color: #a1a3b6;">
@@ -42,10 +48,14 @@
         <div class="left">
             <div class="klik">
                 <ul>
-                    <li><a href="" class="active">Your post</a></li>
+                    @if (Auth::id() === $user->id)
+                    <li><a href="" class="active">All post</a></li>
                     <li><a href="">Liked</a></li>
                     <li><a href="">Mark</a></li>
                     <li><a href="">Draft</a></li>
+                    @else
+                    <li><a href="" class="active">All post</a></li>
+                    @endif
                 </ul>
             </div>
             <hr style="color: #a1a3b6;">
