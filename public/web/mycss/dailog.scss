@@ -137,7 +137,7 @@
         }
       }
 
-      a {
+      .blog {
         text-decoration: none;
 
         .kartu {
@@ -147,7 +147,6 @@
           border-radius: 8px;
           padding: 20px;
           gap: 40px;
-          cursor: pointer;
 
           .left-content {
             flex: 1;
@@ -156,8 +155,15 @@
               display: flex;
               gap: 10px;
               align-items: center;
-              justify-content: start;
+              justify-content: space-between;
               margin-bottom: 10px;
+
+              .img{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+              }
 
               p {
                 margin: 0;
@@ -203,7 +209,15 @@
             .userr {
               display: flex;
               justify-content: space-between;
-
+              .like{
+                .btn-like{
+                  display: flex;
+                  align-items: start;
+                  .fa-heart{
+                    color: var(--primary);
+                  }
+                }
+              }
               .fa-calendar {
                 color: var(--secondary);
               }
@@ -227,11 +241,14 @@
             display: flex;
             justify-content: flex-end;
 
-            img {
+            a{
               width: 100%;
               max-width: 250px;
-              height: 150px;
-              border-radius: 8px;
+
+              img {
+                height: 160px;
+                border-radius: 8px;
+              }
             }
           }
         }
@@ -269,9 +286,8 @@
 
           .user {
             display: flex;
-            gap: 10px;
             align-items: center;
-            justify-content: start;
+            gap: 10px ;
             margin-bottom: 10px;
 
             p {

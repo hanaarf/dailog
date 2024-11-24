@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Follow;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,16 @@ class UserController extends Controller
         $draft = Post::where('user_id', $id)->where('is_draft', 1)->orderBy('created_at', 'desc')->get();
         $randomPost = Post::where('is_draft', '2')->where('user_id', '!=', Auth::id())->inRandomOrder()->limit(2)->get();
         $randomUser = User::where('role', '2')->where('id', '!=', Auth::id())->inRandomOrder()->limit(3)->get();
-        return view('website.users.profile', compact('user', 'post', 'randomPost', 'randomUser', 'draft')); 
+
+        $isFollowing = null;
+        if (Auth::check()) {
+            $loggedInUserId = Auth::id();
+            $isFollowing = Follow::where('follower_id', $loggedInUserId)->where('followed_id', $user->id)->exists();
+        }
+
+        $followers = $user->followers;
+        $following = $user->following;
+        return view('website.users.profile', compact('user', 'post', 'randomPost', 'randomUser', 'draft', 'isFollowing', 'followers', 'following')); 
     }
 
     public function edit($id)

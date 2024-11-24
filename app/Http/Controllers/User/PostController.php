@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -27,6 +28,39 @@ class PostController extends Controller
         $randomPost = Post::where('is_draft', '2')->inRandomOrder()->limit(2)->get();
         $randomUser = User::where('role', '2')->inRandomOrder()->limit(3)->get();
         return view('website.posts.draft', compact('post', 'randomPost', 'randomUser'));
+    }
+
+    public function indexlike()
+    {
+        $userId = Auth::id();
+        $post = Post::whereHas('likes', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->get();
+        $randomPost = Post::where('is_draft', '2')->inRandomOrder()->limit(2)->get();
+        $randomUser = User::where('role', '2')->inRandomOrder()->limit(3)->get();
+        return view('website.posts.liked', compact('post', 'randomPost', 'randomUser'));
+    }
+
+    public function indexmark()
+    {
+        $userId = Auth::id();
+        $post = Post::whereHas('bookmarks', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->get();
+        $randomPost = Post::where('is_draft', '2')->inRandomOrder()->limit(2)->get();
+        $randomUser = User::where('role', '2')->inRandomOrder()->limit(3)->get();
+        return view('website.posts.marked', compact('post', 'randomPost', 'randomUser'));
+    }
+
+    public function indexfollow()
+    {
+        $user = Auth::user();
+        $followingIds = DB::table('follows')->where('follower_id', $user->id)->pluck('followed_id');
+        $post = Post::whereIn('user_id', $followingIds)->where('is_draft', '2')->get();
+
+        $randomPost = Post::where('is_draft', '2')->inRandomOrder()->limit(2)->get();
+        $randomUser = User::where('role', '2')->inRandomOrder()->limit(3)->get();
+        return view('website.posts.followed', compact('post', 'randomPost', 'randomUser'));
     }
 
     public function show($id)
@@ -172,6 +206,38 @@ class PostController extends Controller
         $randomUser = User::where('role', '2')->where('id', '!=', Auth::id())->inRandomOrder()->limit(3)->get();
         return view('website.posts.search', compact('keyword', 'blogs', 'users', 'randomPost', 'randomUser'));
     }
+
+    public function like(Request $request)
+    {
+        $existingLike = Like::where('user_id', Auth::id())
+                            ->where('post_id', $request->post_id)
+                            ->first();
+
+        if (!$existingLike) {
+            $like = new Like();
+            $like->user_id = Auth::id();
+            $like->post_id = $request->post_id;
+            $like->save();
+        }
+
+        return response()->json(['success' => true]);
+    }
+
+
+    public function unlike(Request $request)
+    {
+        $like = Like::where('user_id', Auth::id())
+                    ->where('post_id', $request->post_id)
+                    ->first();
+
+        if ($like) {
+            $like->delete();
+        }
+
+        return response()->json(['success' => true]);
+    }
+
+
 
 
 }

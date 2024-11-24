@@ -1,3 +1,10 @@
+<?php
+use App\Models\Notification;
+
+$notifications = Notification::where('to_id', auth()->id())
+                              ->orderBy('created_at', 'desc')
+                              ->get();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,10 +43,12 @@
                     <img src="{{ asset('web/img/home-nl/logodai.svg') }}" alt="">
                     <a class="navbar-brand" href="#">Dailog</a>
                 </div>
-                <form action="{{ route('user.search') }}" method="POST" class="d-flex align-items-center me-auto ps-5 pe-3" role="search">
+                <form action="{{ route('user.search') }}" method="POST"
+                    class="d-flex align-items-center me-auto ps-5 pe-3" role="search">
                     @csrf
                     <div class="position-relative w-100">
-                        <input type="text" name="search" class="form-control ps-4 pe-5" placeholder="Search" aria-label="Search">
+                        <input type="text" name="search" class="form-control ps-4 pe-5" placeholder="Search"
+                            aria-label="Search">
                         <span
                             class="position-absolute top-50 end-0 translate-middle-y me-3 text-white rounded-circle p-2">
                             <i class="bi bi-search"></i>
@@ -58,7 +67,8 @@
                                     class="fa-regular fa-pen-to-square"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-regular fa-bell"></i></a>
+                            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#notif" style="cursor: pointer"><i
+                                    class="fa-regular fa-bell"></i></a>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown" style="display: flex;align-items: center;gap: 8px;">
@@ -77,11 +87,9 @@
                                     <p style="margin-top: 14px;cursor: pointer;"> {{ Auth::user()->username }}</p>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <p style="font-size: 14px;font-weight: 600;padding: 10px;color: #959396;">Welcome
-                                        hanaarf !</p>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('profile.show', Auth::user()->id) }}">
-                                            <i class="fa-regular fa-user text-grey"></i> 
+                                            <i class="fa-regular fa-user text-grey"></i>
                                             Profile
                                         </a>
                                     </li>
@@ -162,6 +170,27 @@
         </div>
     </footer>
     <!-- end footer -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="notif" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Your Notification</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @foreach ($notifications as $notif)
+                    <li>{{ $notif->sender->name}} {{ $notif->message }}</li>
+                    @endforeach
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- cdn bootstrap -->

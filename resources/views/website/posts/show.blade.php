@@ -2,6 +2,7 @@
 
 @section('style')
 <link rel="stylesheet" href="{{ asset('web/mycss/show.css') }}" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('main')
@@ -11,10 +12,21 @@
         <div class="img">
             <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="" class="img-fluid">
             <div class="act">
-                <i class="fa-solid fa-heart"></i>
-                <p>3</p>
+                @php
+                $isLiked = $post->likes->contains('user_id', Auth::id());
+                @endphp
+                <button class="like-btn" data-post-id="{{ $post->id }}"
+                    style="border: none; background-color: transparent">
+                    <i class="{{ $isLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart' }}"></i>
+                </button>
+                <p>{{ $post->likes->count() }}</p>
                 <i class="fa-solid fa-comment" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
                 <p>{{ $commentsCount }}</p>
+                <button class="bookmark-btn" data-post-id="{{ $post->id }}"
+                    style="border: none; background-color: transparent">
+                    <i
+                        class="fa {{ auth()->user()->bookmarks->contains('post_id', $post->id) ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark' }}"></i>
+                </button>
             </div>
         </div>
         <div class="judul">
@@ -60,7 +72,8 @@
                     @endif
 
                     <div class="ms-3">
-                        <p class="mt-3"><strong class="me-3">{{ $comment->user->username }}</strong>{{ $comment->comment }}
+                        <p class="mt-3"><strong
+                                class="me-3">{{ $comment->user->username }}</strong>{{ $comment->comment }}
                         </p>
                     </div>
                 </div>
@@ -97,6 +110,36 @@
 @endsection
 
 @section('script')
+{{-- like --}}
+<script>
+    document.querySelectorAll('.like-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const postId = this.getAttribute('data-post-id');
+            const isLiked = this.querySelector('i').classList.contains('fa-solid');
+
+            fetch(isLiked ? '/U/unlike' : '/U/like', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        post_id: postId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        this.querySelector('i').classList.toggle('fa-solid');
+                        this.querySelector('i').classList.toggle('fa-regular');
+                    }
+                });
+        });
+    });
+
+</script>
+
+{{-- copy url tautan --}}
 <script>
     document.getElementById("copy-link").addEventListener("click", copyToClipboard);
     document.getElementById("copy-text").addEventListener("click", copyToClipboard);
@@ -141,4 +184,52 @@
     }
 
 </script>
+
+{{-- bookmark --}}
+<script>
+    document.querySelectorAll('.bookmark-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            // Ambil ID post dari data attribute
+            const postId = this.dataset.postId;
+
+            // Ambil elemen ikon di dalam tombol
+            const icon = this.querySelector('i');
+
+            // Kirim permintaan POST untuk toggle bookmark
+            fetch('/U/bookmark', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        post_id: postId
+                    })
+                })
+                .then(response => {
+                    // Cek apakah respons berhasil
+                    if (!response.ok) {
+                        throw new Error('Gagal mengupdate bookmark.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Update ikon berdasarkan status bookmark
+                    if (data.status === 'bookmarked') {
+                        icon.classList.remove('fa-regular');
+                        icon.classList.add('fa-solid');
+                    } else if (data.status === 'unbookmarked') {
+                        icon.classList.remove('fa-solid');
+                        icon.classList.add('fa-regular');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi masalah saat mengupdate bookmark.');
+                });
+        });
+    });
+
+</script>
+
 @endsection

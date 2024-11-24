@@ -4,7 +4,10 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BaseController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\User\BookmarkController;
+use App\Http\Controllers\User\FollowController;
 use App\Http\Controllers\User\PostController as UserPostController;
+use App\Http\Controllers\User\ReportController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +63,9 @@ Route::prefix('U')->middleware(['auth', 'isUser'])->group(function(){
     Route::controller(UserPostController::class)->group(function() {
         Route::get('/home', 'index')->name('index.home');
         Route::get('/draft', 'indexdraft')->name('index.draft');
+        Route::get('/liked', 'indexlike')->name('index.like');
+        Route::get('/marked', 'indexmark')->name('index.mark');
+        Route::get('/followed', 'indexfollow')->name('index.follow');
         Route::get('/home/{id}', 'show')->name('show.post');
         Route::get('/create-post', 'create')->name('user.create.post');
         Route::post('/upload-ck', 'upload')->name('user.ckeditor.upload');
@@ -69,10 +75,22 @@ Route::prefix('U')->middleware(['auth', 'isUser'])->group(function(){
         Route::delete('/post/{id}', 'destroy')->name('destroy.post');
         Route::post('/search', 'search')->name('user.search');
         Route::post('/post/{postId}/comment', 'storeComment')->name('comments.store');
+        Route::post('/like', 'like')->name('like');
+        Route::post('/unlike', 'unlike')->name('unlike');
     });
     Route::controller(UserController::class)->group(function() {
         Route::get('/profile/{id}', 'show')->name('profile.show');
         Route::get('/profile/edit/{id}', 'edit')->name('profile.edit');
         Route::put('/profile/edit/{id}', 'update')->name('profile.update');
+    });
+    Route::controller(FollowController::class)->group(function() {
+        Route::post('/follow/{id}', 'follow')->name('follow');
+    });
+    Route::controller(BookmarkController::class)->group(function() {
+        Route::post('/bookmark', 'toggleBookmark')->name('bookmark.toggle');
+        Route::post('/bookmarks', 'listBookmark')->name('bookmarks.list');
+    });
+    Route::controller(ReportController::class)->group(function() {
+        Route::post('/report-blog', 'report')->name('report.blog');
     });
 });

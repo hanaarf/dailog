@@ -15,14 +15,17 @@
         <div class="left">
             <div class="klik">
                 <ul>
-                    <li><a href="{{ route('index.home')}}" class="active">For you</a></li>
-                    <li><a href="{{ route('index.follow') }}">Following</a></li>
+                    <li><a href="{{ route('index.home')}}">For you</a></li>
+                    <li><a href="{{ route('index.follow') }}" class="active">Following</a></li>
                     <li><a href="{{ route('index.like') }}">Liked</a></li>
                     <li><a href="{{ route('index.mark') }}">Mark</a></li>
                     <li><a href="{{ route('index.draft')}}">Draft</a></li>
                 </ul>
             </div>
             <hr>
+            @if($post->isEmpty())
+            <p>You haven't followed any posts yet.</p>
+            @else
             @foreach ($post as $row)
             <div class="blog">
                 <div class="kartu">
@@ -79,7 +82,7 @@
                 </div>
                 <hr>
             </div>
-
+            
 
             <!-- report Modal -->
             <div class="modal fade" id="report" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -149,11 +152,13 @@
                 </div>
             </div>
             @endforeach
+            @endif
 
         </div>
         @include('website.posts.recomend')
     </div>
 </section>
+
 @endsection
 
 @section('script')

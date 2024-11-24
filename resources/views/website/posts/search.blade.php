@@ -39,8 +39,8 @@
         <p><a href="{{ route('index.home') }}">Home</a> > {{ $keyword }}</p>
         <h5>Search for {{ $keyword }}</h5>
         <div class="button">
-            <div class="btn-active">Blog</div>
-            <div class="mt-1">User</div>
+            <div class="btn-active mt-1">Blog</div>
+            <div class="user mt-1">User</div>
         </div>
         <hr>
     </div>
@@ -88,44 +88,7 @@
             <p>No blogs found.</p>
             @endforelse
         </div>
-        <div class="right">
-            <h5>Recomend for you</h5>
-            @foreach ($randomPost as $row)
-            <div class="kartu">
-                <div class="left-content">
-                    <div class="user">
-                        @if($row->user->image)
-                        <img src="{{ asset('storage/' . $row->user->image) }}" alt="User Image" width="35" height="35"
-                            class="rounded-circle">
-                        @else
-                        <img class="rounded-circle" width="35"
-                            src="https://ui-avatars.com/api/?name={{ urlencode($row->user->name) }}" alt="User Avatar">
-                        @endif
-                        <p>by {{ $row->user->name }}</p>
-                    </div>
-                    <h1>{{ $row->title }}</h1>
-                    <p>{{ strip_tags($row->content) }}</p>
-                </div>
-            </div>
-            @endforeach
-
-            <h5 class="mt-5">Staff picks</h5>
-            @foreach ($randomUser as $row)
-            <div class="follow">
-                <div class="user">
-                    @if($row->image)
-                    <img src="{{ asset('storage/' . $row->image) }}" alt="User Image" width="35" height="35"
-                        class="rounded-circle">
-                    @else
-                    <img class="rounded-circle" width="35"
-                        src="https://ui-avatars.com/api/?name={{ urlencode($row->name) }}" alt="User Avatar">
-                    @endif
-                    <p>{{ $row->username }}</p>
-                </div>
-                <a href="">Follow</a>
-            </div>
-            @endforeach
-        </div>
+        @include('website.posts.recomend')
     </div>
 
     <div class="people hidden">
@@ -165,7 +128,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const btnBlog = document.querySelector(".btn-active"); // Tombol Blog (default)
-        const btnUser = document.querySelector(".mt-1"); // Tombol User
+        const btnUser = document.querySelector(".user"); // Tombol User
         const containerBlog = document.querySelector(".left"); // Kontainer Blog
         const containerRight = document.querySelector(".right"); // Kontainer Blog
         const containerPeople = document.querySelector(".people"); // Kontainer People
