@@ -96,7 +96,12 @@
                                     <p>{{ $row->created_at->format('d F Y') }}</p>
                                 </div>
                                 <div class="like d-flex gap-2">
-                                    <i class="fa-regular fa-heart nolike" style="cursor: pointer;"></i>
+                                    @php
+                                    $isLiked = $row->likes->contains('user_id', Auth::id());
+                                    @endphp
+                                    <div class="like-btn btn-like" data-post-id="{{ $row->id }}">
+                                        <i class="{{ $isLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart' }}"></i>
+                                    </div>
                                     <p>{{ $row->likes->count() }}</p>
                                     <i class="fa-solid fa-comment"></i>
                                     <p>{{ $row->comments->count() }}</p>
@@ -104,8 +109,10 @@
                             </div>
                         </div>
                         <div class="right-content">
-                            <img src="{{ asset('storage/' . $row->thumbnail) }}" alt="Placeholder Image"
+                            <a href="{{ route('show.post', $row->id) }}" class="gbr">
+                                <img src="{{ asset('storage/' . $row->thumbnail) }}" alt="Placeholder Image"
                                 class="img-fluid">
+                            </a>
 
                             @if (Auth::id() === $user->id)
                             <a href="{{ route('user.edit.post', $row->id) }}"><i
@@ -153,7 +160,12 @@
                                     <p>{{ $row->created_at->format('d F Y') }}</p>
                                 </div>
                                 <div class="like d-flex gap-2">
-                                    <i class="fa-regular fa-heart nolike" style="cursor: pointer;"></i>
+                                    @php
+                                    $isLiked = $row->likes->contains('user_id', Auth::id());
+                                    @endphp
+                                    <div class="like-btn btn-like" data-post-id="{{ $row->id }}">
+                                        <i class="{{ $isLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart' }}"></i>
+                                    </div>
                                     <p>{{ $row->likes->count() }}</p>
                                     <i class="fa-solid fa-comment"></i>
                                     <p>{{ $row->comments->count() }}</p>
@@ -161,8 +173,11 @@
                             </div>
                         </div>
                         <div class="right-content">
-                            <img src="{{ asset('storage/' . $row->thumbnail) }}" alt="Placeholder Image"
+                            <a href="{{ route('show.post', $row->id) }}" class="gbr">
+                                <img src="{{ asset('storage/' . $row->thumbnail) }}" alt="Placeholder Image"
                                 class="img-fluid">
+                            </a>
+
                             @if (Auth::id() === $user->id)
                             <a href="{{ route('user.edit.post', $row->id) }}"><i
                                     class="fa-solid fa-pen edit-icon"></i></a>
@@ -259,6 +274,35 @@
             // Update class aktif
             draftsBtn.classList.add("active");
             allPostsBtn.classList.remove("active");
+        });
+    });
+
+</script>
+
+<script>
+    document.querySelectorAll('.like-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const postId = this.getAttribute('data-post-id');
+            const isLiked = this.querySelector('i').classList.contains('fa-solid');
+
+            fetch(isLiked ? '/U/unlike' : '/U/like', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        post_id: postId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                        this.querySelector('i').classList.toggle('fa-solid');
+                        this.querySelector('i').classList.toggle('fa-regular');
+                    }
+                });
         });
     });
 

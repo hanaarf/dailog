@@ -130,6 +130,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
+                        location.reload();
                         this.querySelector('i').classList.toggle('fa-solid');
                         this.querySelector('i').classList.toggle('fa-regular');
                     }

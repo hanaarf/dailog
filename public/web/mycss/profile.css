@@ -221,6 +221,13 @@
   display: flex;
   justify-content: space-between;
 }
+.main .container .left .blog .kartu .left-content .userr .like .btn-like {
+  display: flex;
+  align-items: start;
+}
+.main .container .left .blog .kartu .left-content .userr .like .btn-like .fa-heart {
+  color: var(--primary);
+}
 .main .container .left .blog .kartu .left-content .userr .fa-calendar {
   color: var(--secondary);
 }
@@ -239,10 +246,14 @@
   justify-content: flex-end;
   position: relative;
 }
-.main .container .left .blog .kartu .right-content img {
-  width: 100%;
+.main .container .left .blog .kartu .right-content .gbr {
+  width: 250px;
   max-width: 250px;
   height: 150px;
+}
+.main .container .left .blog .kartu .right-content .gbr img {
+  width: 100%;
+  height: 100%;
   border-radius: 8px;
 }
 .main .container .left .blog .kartu .right-content:hover .hover-img {

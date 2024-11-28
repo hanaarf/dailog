@@ -280,23 +280,31 @@
                         .userr {
                             display: flex;
                             justify-content: space-between;
-
+                            .like{
+                              .btn-like{
+                                display: flex;
+                                align-items: start;
+                                .fa-heart{
+                                  color: var(--primary);
+                                }
+                              }
+                            }
                             .fa-calendar {
-                                color: var(--secondary);
+                              color: var(--secondary);
                             }
-
+              
                             .islike {
-                                color: #ed7171;
+                              color: #ed7171;
                             }
-
+              
                             .nolike {
-                                color: var(--primary);
+                              color: var(--primary);
                             }
-
+              
                             .fa-comment {
-                                color: #B0B0B0;
+                              color: #B0B0B0;
                             }
-                        }
+                          }
                     }
 
                     .right-content {
@@ -305,11 +313,15 @@
                         justify-content: flex-end;
                         position: relative;
                     
-                        img {
-                            width: 100%;
+                        .gbr{
+                            width: 250px;
                             max-width: 250px;
                             height: 150px;
-                            border-radius: 8px;
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 8px;
+                            }
                         }
                     
                         &:hover {

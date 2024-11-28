@@ -44,6 +44,11 @@
                 <span class="nav-text">Post</span>
             </a>
             </li>
+            <li><a class="ai-icon" href="{{ route('a.index.report')}}" aria-expanded="false">
+                <i class="flaticon-381-internet"></i>
+                <span class="nav-text">Report</span>
+            </a>
+        </li>
             <li class="nav-label">components</li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-003-diamond"></i>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,7 +36,8 @@ class PostController extends Controller
         $userId = Auth::id();
         $post = Post::whereHas('likes', function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        })->get();
+        }) ->where('is_draft', '2')
+        ->get();
         $randomPost = Post::where('is_draft', '2')->inRandomOrder()->limit(2)->get();
         $randomUser = User::where('role', '2')->inRandomOrder()->limit(3)->get();
         return view('website.posts.liked', compact('post', 'randomPost', 'randomUser'));
@@ -46,7 +48,8 @@ class PostController extends Controller
         $userId = Auth::id();
         $post = Post::whereHas('bookmarks', function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        })->get();
+        }) ->where('is_draft', '2')
+        ->get();
         $randomPost = Post::where('is_draft', '2')->inRandomOrder()->limit(2)->get();
         $randomUser = User::where('role', '2')->inRandomOrder()->limit(3)->get();
         return view('website.posts.marked', compact('post', 'randomPost', 'randomUser'));
@@ -237,7 +240,13 @@ class PostController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function deletenotif($id)
+    {
+        $notification = Notification::findOrFail($id);
+        $notification->delete();
 
+        return redirect()->back()->with('success', 'Notification deleted successfully.');
+    }
 
 
 }

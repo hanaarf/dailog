@@ -3,8 +3,10 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BaseController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\User\BookmarkController;
+use App\Http\Controllers\User\ChartController;
 use App\Http\Controllers\User\FollowController;
 use App\Http\Controllers\User\PostController as UserPostController;
 use App\Http\Controllers\User\ReportController;
@@ -49,13 +51,12 @@ Route::prefix('A')->middleware(['auth', 'isAdmin'])->group(function() {
     });
     Route::controller(PostController::class)->group(function() {
         Route::get('/post', 'index')->name('index.post');
-        Route::get('/post/create', 'create')->name('create.post');
-        Route::post('/post/simpan', 'store')->name('simpan.post');
-        Route::get('/post/edit/{id}', 'edit')->name('edit.post');
-        Route::put('/post/update/{id}', 'update')->name('update.post');
-        Route::delete('/post/delete/', 'delete')->name('delete.post');
-        Route::post('/upload-image', 'uploadImage')->name('upload.image');
-        Route::post('/upload-ck', 'upload')->name('ckeditor.upload');
+        Route::get('/a/post/{id}', 'show')->name('a.show.post');
+        Route::delete('/post/delete/{id}', 'delete')->name('delete.post');
+    });
+    Route::controller(AdminReportController::class)->group(function() {
+        Route::get('/a/report', 'index')->name('a.index.report');
+        Route::delete('/a/reports/{post_id}', 'destroy')->name('report.destroy');
     });
 });
 
@@ -77,6 +78,7 @@ Route::prefix('U')->middleware(['auth', 'isUser'])->group(function(){
         Route::post('/post/{postId}/comment', 'storeComment')->name('comments.store');
         Route::post('/like', 'like')->name('like');
         Route::post('/unlike', 'unlike')->name('unlike');
+        Route::delete('/notifications/{id}', 'deletenotif')->name('delete.notif');
     });
     Route::controller(UserController::class)->group(function() {
         Route::get('/profile/{id}', 'show')->name('profile.show');
@@ -92,5 +94,8 @@ Route::prefix('U')->middleware(['auth', 'isUser'])->group(function(){
     });
     Route::controller(ReportController::class)->group(function() {
         Route::post('/report-blog', 'report')->name('report.blog');
+    });
+    Route::controller(ChartController::class)->group(function() {
+        Route::get('/chart-blog', 'chart')->name('chart.blog');
     });
 });

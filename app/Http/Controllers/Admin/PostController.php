@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
+use App\Models\Notification;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,64 +14,45 @@ class PostController extends Controller
 {
     public function index()
     {
-        $post = Post::all();
+        $post = Post::where('is_draft', '2')->orderBy('created_at', 'desc')->get();
         return view('dashboard.posts.index', compact('post'));
     }
 
-    public function create()
+    public function show($id)
     {
-        return view('dashboard.posts.tambah');
-    }
-
-    public function store(Request $request)
-    {
-        dd($request->all());
-
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
-        ]);
-    
-        Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'user_id' => Auth::id(),
-            'thumbnail' => $request->hasFile('thumbnail') ? $request->file('thumbnail')->store('thumbnails', 'public') : null,
-        ]);
-    
-        return redirect()->route('index.post')->with('success', 'Post berhasil ditambahkan');
-    }
-
-    public function uploadImage(Request $request)
-    {
-        if ($request->hasFile('upload')) {
-            // Simpan file
-            $path = $request->file('upload')->store('images', 'public');
-            // URL untuk gambar yang di-upload
-            $url = Storage::url($path);
-            // Response untuk CKEditor
-            return response()->json([
-                'uploaded' => true,
-                'url' => asset('storage/' . $path)
-            ]);
+        $post = Post::findOrFail($id);
+        $user = $post->user;
+        if ($post->is_draft == '1' && $post->user_id !== Auth::id()) {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
         }
-        return response()->json(['uploaded' => false], 400);
+
+        $comments = Comment::where('post_id', $id)->orderBy('created_at', 'desc')->get();
+        
+        $followers = $user->followers;
+        $following = $user->following;
+        return view('dashboard.posts.detail', compact('post', 'followers', 'following', 'comments'));
     }
 
-    public function upload(Request $request)
+    public function delete($id)
     {
-       if ($request->hasFile('upload')) {
-            $originName = $request->file('upload')->getClientOriginalName();
-            $fileName = pathinfo($originName, PATHINFO_FILENAME);
-            $extension = $request->file('upload')->getClientOriginalExtension();
-            $fileName = $fileName . '_' . time() . '.' . $extension;
+        $post = Post::findOrFail($id);
 
-            $request->file('upload')->move(public_path('media'), $fileName);
-
-            $url = asset('media/' . $fileName);
-            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+        if ($post->thumbnail) {
+            Storage::disk('public')->delete($post->thumbnail);
         }
+
+        $adminId = Auth::id(); 
+
+        Notification::create([
+            'from_id' => $adminId, 
+            'to_id' => $post->user_id, 
+            'message' => 'telah menghapus postingan anda berjudul "' . $post->title . '".',
+        ]);
+
+        // Hapus postingan
+        $post->delete();
+
+        return redirect()->route('index.post')->with('success', 'Post berhasil dihapus');
     }
 
 }

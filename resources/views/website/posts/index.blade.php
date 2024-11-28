@@ -3,7 +3,15 @@
 @section('style')
 <link rel="stylesheet" href="{{ asset('web/mycss/dailog.css') }}" />
 @endsection
+
 @section('main')
+
+@if(Session::get('success'))
+<div class="alert alert-success" role="alert">
+    {{ Session::get('success') }}
+</div>
+@endif
+
 <section>
     <div style="display: flex;justify-content: center;align-items: center;margin-top: 50px;margin-bottom: 50px;">
         <img src="{{ asset('web/img/home-l/image.svg') }}" alt="" width="85%">
@@ -44,9 +52,12 @@
                                     aria-expanded="false"></i>
 
                                 <ul class="dropdown-menu">
-                                    <li> <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#report">
+                                    <li>
+                                        <button class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#report-{{ $row->id }}">
                                             Report Postingan
-                                        </button></li>
+                                        </button>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -82,66 +93,69 @@
 
 
             <!-- report Modal -->
-            <div class="modal fade" id="report" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="report-{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Report</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('report.blog') }}" id="reportForm" method="POST">
+                        <form action="{{ route('report.blog') }}" method="POST">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $row->id }}">
                             <div class="modal-body">
                                 <p>Why are you reporting this post?</p>
+
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="reason" id="reason1"
-                                        value="I just don't like it">
+                                    <input class="form-check-input" type="radio" name="reason"
+                                        value="I just don't like it" id="reason1">
                                     <label class="form-check-label" for="reason1">I just don't like it</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="reason" id="reason2"
-                                        value="Suicide, self-harm, or eating disorders">
+                                    <input class="form-check-input" type="radio" name="reason"
+                                        value="Suicide, self-harm, or eating disorders" id="reason2">
                                     <label class="form-check-label" for="reason2">Suicide, self-harm, or eating
                                         disorders</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="reason" id="reason3"
-                                        value="Bullying or unwanted contact">
+                                    <input class="form-check-input" type="radio" name="reason"
+                                        value="Bullying or unwanted contact" id="reason3">
                                     <label class="form-check-label" for="reason3">Bullying or unwanted contact</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="reason" id="reason4"
-                                        value="Violence, hatred or exploitation">
+                                    <input class="form-check-input" type="radio" name="reason"
+                                        value="Violence, hatred or exploitation" id="reason4">
                                     <label class="form-check-label" for="reason4">Violence, hatred or
                                         exploitation</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="reason" id="reason5"
-                                        value="Selling or promoting prohibited goods">
+                                    <input class="form-check-input" type="radio" name="reason"
+                                        value="Selling or promoting prohibited goods" id="reason5">
                                     <label class="form-check-label" for="reason5">Selling or promoting prohibited
                                         goods</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="reason" id="reason6"
-                                        value="Nudity or sexual activity">
+                                    <input class="form-check-input" type="radio" name="reason"
+                                        value="Nudity or sexual activity" id="reason6">
                                     <label class="form-check-label" for="reason6">Nudity or sexual activity</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="reason" id="reason7"
-                                        value="Fraud, embezzlement, or spam">
+                                    <input class="form-check-input" type="radio" name="reason"
+                                        value="Fraud, embezzlement, or spam" id="reason7">
                                     <label class="form-check-label" for="reason7">Fraud, embezzlement, or spam</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="reason" id="reason8"
-                                        value="False information">
+                                    <input class="form-check-input" type="radio" name="reason" value="False information"
+                                        id="reason8">
                                     <label class="form-check-label" for="reason8">False information</label>
                                 </div>
                             </div>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn" data-bs-dismiss="modal"
                                     style="background-color: var(--cream); color: var(--secondary);">Cancel</button>
-                                <button type="submit" class="btn" form="reportForm"
+                                <button type="submit" class="btn"
                                     style="background-color: var(--secondary); color: #fff;">Submit</button>
                             </div>
                         </form>
@@ -176,6 +190,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
+                        location.reload();
                         this.querySelector('i').classList.toggle('fa-solid');
                         this.querySelector('i').classList.toggle('fa-regular');
                     }

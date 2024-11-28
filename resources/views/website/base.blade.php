@@ -67,8 +67,8 @@ $notifications = Notification::where('to_id', auth()->id())
                                     class="fa-regular fa-pen-to-square"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#notif" style="cursor: pointer"><i
-                                    class="fa-regular fa-bell"></i></a>
+                            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#notif"
+                                style="cursor: pointer"><i class="fa-regular fa-bell"></i></a>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown" style="display: flex;align-items: center;gap: 8px;">
@@ -89,21 +89,20 @@ $notifications = Notification::where('to_id', auth()->id())
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" href="{{ route('profile.show', Auth::user()->id) }}">
-                                            <i class="fa-regular fa-user text-grey"></i>
+                                            <i class="fa-solid fa-user"></i>
                                             Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('chart.blog') }}">
+                                            <i class="fa-solid fa-chart-simple"></i>
+                                            Stats
                                         </a>
                                     </li>
                                     <hr>
                                     <li><a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                            <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
-                                                width="18" height="18" viewbox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                                <polyline points="16 17 21 12 16 7"></polyline>
-                                                <line x1="21" y1="12" x2="9" y2="12"></line>
-                                            </svg>
+                                            <i class="fa-solid fa-right-from-bracket text-danger"></i>
                                             Logout
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
@@ -135,10 +134,10 @@ $notifications = Notification::where('to_id', auth()->id())
                 </div>
                 <div class="col-md-4 mb-3 text-center menu">
                     <ul class="list-unstyled d-flex justify-content-center align-items-center">
-                        <li class="mx-2"><a href="#">Home</a></li>
+                        {{-- <li class="mx-2"><a href="#">Home</a></li>
                         <li class="mx-2"><a href="#">About</a></li>
                         <li class="mx-2"><a href="#">Explore</a></li>
-                        <li class="mx-2"><a href="#">Features</a></li>
+                        <li class="mx-2"><a href="#">Features</a></li> --}}
                     </ul>
                 </div>
                 <div class="col-md-4 mb-3 text-center icon">
@@ -177,20 +176,39 @@ $notifications = Notification::where('to_id', auth()->id())
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Your Notification</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Your Notifications</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @foreach ($notifications as $notif)
-                    <li>{{ $notif->sender->name}} {{ $notif->message }}</li>
-                    @endforeach
+                    @if ($notifications->isEmpty())
+                    <p class="text-muted text-center">No notifications available.</p>
+                    @else
+                    <ul class="list-group">
+                        @foreach ($notifications as $notif)
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <a href="profile/{{ $notif->sender->id }}" class="fw-bold text-black text-decoration-none">{{ $notif->sender->name }}</a>
+                                <span>{{ $notif->message }}</span>
+                                <small class="text-muted d-block">{{ $notif->created_at->format('d M Y, H:i') }}</small>
+                            </div>
+                            <form action="{{ route('delete.notif', $notif->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <!-- cdn bootstrap -->
