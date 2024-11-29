@@ -55,9 +55,9 @@
 
                             <div class="button" style="display: flex;gap: 5px;">
                                 <input type="submit" value="Sign In" class="sign-btn" />
-                                <div class="sign-btn1">
+                                {{-- <div class="sign-btn1">
                                     <img src="{{ asset('web/img/image 6.png') }}" alt="" width="20px">Google
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="heading">
@@ -113,9 +113,9 @@
 
                             <div class="button" style="display: flex;gap: 5px;">
                                 <input type="submit" value="Sign Up" class="sign-btn" />
-                                <div class="sign-btn1">
+                                {{-- <div class="sign-btn1">
                                     <img src="{{ asset('web/img/image 6.png') }}" alt="" width="20px">Google
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="heading">

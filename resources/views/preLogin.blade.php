@@ -40,16 +40,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" aria-current="page" href="#home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="#about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Explores</a>
+                            <a class="nav-link" href="#feature">Features</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="#explore">Explores</a>
                         </li>
                     </ul>
                     <div class="d-flex">
@@ -74,7 +74,7 @@
     <!-- end navbar -->
 
     <!-- hero -->
-    <section class="hero-page">
+    <section class="hero-page" id="home">
         <div class="hero">
             <h1 class="text-uppercase">dailog</h1>
             <p>Blog Platform for Your Ideas</p>
@@ -106,7 +106,7 @@
     <!-- end hero -->
 
     <!-- about -->
-    <section class="about-page">
+    <section class="about-page" id="about">
         <div class="about">
             <h1>About Dailog</h1>
             <p>Welcome to Dailog, where your everyday thoughts and stories come to life. Built for anyone with a passion
@@ -119,7 +119,7 @@
     <!-- end about -->
 
     <!-- see -->
-    <section class="see container">
+    <section class="see container" id="see">
         <div class="row">
             <div class="col-md-6 content-see d-flex align-items-center">
                 <div class="desc-see">
@@ -140,7 +140,7 @@
     <!-- end see -->
 
     <!-- features -->
-    <div class="container my-5 fitur-page">
+    <div class="container my-5 fitur-page" id="feature">
         <h1>Our Features</h1>
         <div class="row">
             <div class="col-md-4 mb-3 kartu">
@@ -187,7 +187,7 @@
     <!-- end features -->
 
     <!-- explore -->
-    <section class="explore container">
+    <section class="explore container" id="explore">
         <h1>Explore <br>
             Our Blog</h1>
         <div class="row">
