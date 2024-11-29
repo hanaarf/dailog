@@ -48,18 +48,7 @@
                 <i class="flaticon-381-internet"></i>
                 <span class="nav-text">Report</span>
             </a>
-        </li>
-            <li class="nav-label">components</li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-003-diamond"></i>
-                    <span class="nav-text">Bootstrap</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="ui-accordion.html">Accordion</a></li>
-
-                </ul>
-            </li>
-        </ul>
+       
         {{-- <div class="copyright">
             <p><strong>Zenix Crypto Admin Dashboard</strong> © 2021 All Rights Reserved</p>
             <p class="fs-12">Made with <span class="heart"></span> by DexignZone</p>

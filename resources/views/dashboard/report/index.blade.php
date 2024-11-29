@@ -112,7 +112,7 @@
                                         <td>{{ $row->post->user->name }}</td>
                                         <td>
                                             <div class="d-flex">
-                                                <button type="button" class="btn btn-primary shadow btn-xs sharp mr-1"
+                                                <button type="button" class="btn btn-primary shadow sharp mr-1"
                                                     data-toggle="modal" data-target="#detailreport-{{ $row->post_id }}">
                                                     <i class="fa fa-eye"></i>
                                                 </button>
@@ -153,13 +153,19 @@
                                                     </div>
                                                 </div>
 
-                                                <a href="{{ route('a.show.post', $row->post->id)}}"
-                                                    class="btn btn-warning shadow btn-xs sharp mr-1"><i
-                                                        class="fa fa-info"></i></a>
+                                               
+                                                <form action="{{ route('r.delete.post', $row->post_id) }}" method="POST" class="d-inline"
+                                                    onsubmit="return confirmDeleteBlog()">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-warning shadow sharp mr-1">
+                                                        Delete blog
+                                                    </button>
+                                                </form>
 
                                                 <a href="#" onclick="confirmDelete({{ $row->post_id }})"
-                                                    class="btn btn-danger shadow btn-xs sharp">
-                                                    <i class="fa fa-trash"></i>
+                                                    class="btn btn-danger shadow sharp">
+                                                   hapus report
                                                 </a>
 
                                                 <form id="delete-form-{{ $row->post_id }}"
@@ -205,6 +211,12 @@
 @endsection
 
 @section('script')
+<script>
+    function confirmDeleteBlog() {
+       return confirm("Apakah Anda yakin ingin menghapus post ini? Gambar juga akan dihapus.");
+   }
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>

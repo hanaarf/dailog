@@ -35,14 +35,9 @@
         ***********************************-->
 		@include('template.navheader')
 
-        <!--**********************************
-            Chat box start
-        ***********************************-->
-        @include('template.chatbox')
-
 
         <!--**********************************
-            Header start
+            Topbar start
         ***********************************-->
         @include('template.topbar')
 

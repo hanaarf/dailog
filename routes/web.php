@@ -57,6 +57,7 @@ Route::prefix('A')->middleware(['auth', 'isAdmin'])->group(function() {
     Route::controller(AdminReportController::class)->group(function() {
         Route::get('/a/report', 'index')->name('a.index.report');
         Route::delete('/a/reports/{post_id}', 'destroy')->name('report.destroy');
+        Route::delete('/rpost/delete/{id}', 'delete')->name('r.delete.post');
     });
 });
 

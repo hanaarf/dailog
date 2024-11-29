@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class ChartController extends Controller
 {
     public function chart()
-   {
-    $userId = Auth::id(); // Ambil ID user yang login
+    {
+        $userId = Auth::id(); // Ambil ID user yang login
 
-  
         // Data untuk postingan yang sudah dipublikasikan per hari
         $publishedPosts = Post::where('is_draft', '2')
             ->where('user_id', $userId)
@@ -31,21 +30,21 @@ class ChartController extends Controller
             ->orderBy('day_of_week', 'ASC')
             ->get();
 
-        // Label untuk hari-hari Senin sampai Jumat
+        // Label untuk semua hari dalam seminggu
         $days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
         // Data untuk chart
-        $labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']; // Label yang ditampilkan hanya Senin sampai Jumat
+        $labels = $days; // Semua hari Minggu sampai Sabtu
         $publishedData = [];
         $draftData = [];
 
-        // Mengisi data untuk chart berdasarkan hari Senin sampai Jumat
-        foreach (range(2, 6) as $dayOfWeek) { // Hanya Senin (2) sampai Jumat (6)
+        // Mengisi data untuk chart berdasarkan semua hari Minggu sampai Sabtu
+        foreach (range(1, 7) as $dayOfWeek) { // Minggu (1) sampai Sabtu (7)
             $publishedData[] = $publishedPosts->where('day_of_week', $dayOfWeek)->first()->total ?? 0;
             $draftData[] = $draftPosts->where('day_of_week', $dayOfWeek)->first()->total ?? 0;
         }
 
-    return view('website.charts.index', compact('labels', 'publishedData', 'draftData'));
+        return view('website.charts.index', compact('labels', 'publishedData', 'draftData'));
+    }
 
-   }
 }
