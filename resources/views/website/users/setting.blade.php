@@ -29,6 +29,9 @@
             </div><br><br>
 
             <div class="form-group">
+                <input type="hidden" id="name" name="email" value="{{ $user->email }}">
+            </div>
+            <div class="form-group">
                 <label>Name</label>
                 <input type="text" id="name" name="name" value="{{ $user->name }}">
             </div>
@@ -42,7 +45,7 @@
             </div>
             <div class="form-group">
                 <label>Pw</label>
-                <input type="password" name="password" id="password" value="{{ $user->password }}">
+                <input type="password" name="password" id="password">
             </div>
             <br>
             <div class="button">

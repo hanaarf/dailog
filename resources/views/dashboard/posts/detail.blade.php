@@ -59,13 +59,13 @@
                 <div class="profile card card-body px-3 pt-3 pb-0">
                     <div class="profile-head">
                         <div class="photo-content">
-                            <img src="{{ asset('storage/' . $post->thumbnail) }}" class="cover-photo" alt="" style="height: 200px;object-fit: cover ">
+                            <img src="{{ asset('storage/' . $post->thumbnail) }}" class="cover-photo" alt="" style="height: 200px;object-fit: cover;">
                         </div>
                         <div class="profile-info">
                             <div class="profile-photo">
                                 @if($post->user->image)
                                 <img src="{{ asset('storage/' . $post->user->image) }}" alt="User Image"
-                                    class="rounded-circle">
+                                    class="rounded-circle" style="max-width: 100px;max-height: 100px">
                                 @else
                                 <img class="rounded-circle"
                                     src="https://ui-avatars.com/api/?name={{ urlencode($post->user->name) }}"

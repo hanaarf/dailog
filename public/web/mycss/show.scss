@@ -97,6 +97,38 @@
                 max-height: 420px;
                 margin-bottom: 28px;
             }
+            @media (max-width: 1200px) {
+                img{
+                    width: 450px;
+                    max-width: 551px;
+                    max-height: 420px;
+                    margin-bottom: 28px;
+                }
+            }
+            @media (max-width: 1000px) {
+                img{
+                    width: 390px;
+                    max-width: 551px;
+                    max-height: 420px;
+                    margin-bottom: 28px;
+                }
+            }
+            @media (max-width: 900px) {
+                img{
+                    width: 340px;
+                    max-width: 551px;
+                    max-height: 420px;
+                    margin-bottom: 28px;
+                }
+            }
+            @media (max-width:800px) {
+                img{
+                    width: 320px;
+                    max-width: 551px;
+                    max-height: 420px;
+                    margin-bottom: 28px;
+                }
+            }
 
             .act {
                 display: flex;
@@ -121,6 +153,30 @@
                 }
             }
         }
+        @media (max-width: 1200px) {
+            .img{
+                margin-left: 490px;
+                margin-top: 90px;
+            }
+        }
+        @media (max-width: 1000px) {
+            .img{
+                margin-left: 430px;
+                margin-top: 150px;
+            }
+        }
+        @media (max-width: 900px) {
+            .img{
+                margin-left: 400px;
+                margin-top: 150px;
+            }
+        }
+        @media (max-width: 800px) {
+            .img{
+                margin-left: 350px;
+                margin-top: 150px;
+            }
+        }
 
         .judul {
             justify-content: end;
@@ -141,6 +197,31 @@
                     margin-left: 5px;
                 }
             }
+            @media (max-width: 1000px) {
+                h1{
+                    width: 50%;
+                    font-size: 26px;
+                }
+            }
+            @media (max-width: 900px) {
+                h1{
+                    width: 80%;
+                    font-size: 26px;
+                }
+            }
+            @media (max-width: 800px) {
+                h1{
+                    width: 70%;
+                    font-size: 26px;
+                }
+            }
+            @media (max-width: 700px) {
+                h1{
+                    width: 60%;
+                    font-size: 26px;
+                }
+            }
+            
 
             p {
                 margin-bottom: 7px;
@@ -170,6 +251,16 @@
                 }
             }
         }
+        @media (max-width: 1000px) {
+            .judul{
+                width: 550px;
+            }
+        }
+        @media (max-width: 900px) {
+            .judul{
+                width: 450px;
+            }
+        }
 
         .judul p:nth-of-type(2) {
             font-size: 12px;
@@ -191,6 +282,46 @@
             p {
                 line-height: 42px;
             }
+        }
+    }
+    @media (max-width: 1200px) {
+        .content{
+            padding-left: 250px;
+            padding-right: 250px;
+            padding-top: 50px;
+            padding-bottom: 30px;
+        }
+    }
+    @media (max-width: 900px) {
+        .content{
+            padding-left: 200px;
+            padding-right: 200px;
+            padding-top: 50px;
+            padding-bottom: 30px;
+        }
+    }
+    @media (max-width: 800px) {
+        .content{
+            padding-left: 150px;
+            padding-right: 120px;
+            padding-top: 50px;
+            padding-bottom: 30px;
+        }
+    }
+    @media (max-width: 700px) {
+        .content{
+            padding-left: 150px;
+            padding-right: 0px;
+            padding-top: 50px;
+            padding-bottom: 30px;
+        }
+    }
+    @media (max-width: 400px) {
+        .content{
+            padding-left: 80px;
+            padding-right: 0px;
+            padding-top: 50px;
+            padding-bottom: 30px;
         }
     }
 }

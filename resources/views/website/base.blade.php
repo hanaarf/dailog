@@ -41,7 +41,7 @@ $notifications = Notification::where('to_id', auth()->id())
             <div class="container-fluid pt-2 pb-2" id="navbarTogglerDemo02">
                 <div class="d-flex gap-2 logo ps-5">
                     <img src="{{ asset('web/img/home-nl/logodai.svg') }}" alt="">
-                    <a class="navbar-brand" href="#">Dailog</a>
+                    <a class="navbar-brand" href="{{ route('index.home')}}">Dailog</a>
                 </div>
                 <form action="{{ route('user.search') }}" method="POST"
                     class="d-flex align-items-center me-auto ps-5 pe-3" role="search">

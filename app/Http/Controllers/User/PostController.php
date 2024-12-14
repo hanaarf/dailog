@@ -203,7 +203,7 @@ class PostController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->input('search');
-        $blogs = Post::where('title', 'LIKE', "%$keyword%")->get();
+        $blogs = Post::where('title', 'LIKE', "%$keyword%")->where('is_draft', '2')->get();
         $users = User::where('name', 'LIKE', "%$keyword%")->get();
         $randomPost = Post::where('is_draft', '2')->where('user_id', '!=', Auth::id())->inRandomOrder()->limit(2)->get();
         $randomUser = User::where('role', '2')->where('id', '!=', Auth::id())->inRandomOrder()->limit(3)->get();

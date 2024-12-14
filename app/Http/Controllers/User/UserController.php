@@ -44,9 +44,15 @@ class UserController extends Controller
         $data = [
             'name' => $request->name,
             'username' => $request->username,
+            'email' => $request->email,
             'bio' => $request->bio,
-            'password' => bcrypt($request->password),
         ];
+
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password);
+        } else {
+            $data['password'] = $user->password; 
+        }
 
         if ($request->hasFile('image')) {
             if ($user->image && Storage::exists($user->image)) {

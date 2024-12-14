@@ -7,7 +7,7 @@
 @section('main')
 
 @if(Session::get('success'))
-<div class="alert alert-success" role="alert">
+<div class="alert alert-success" role="alert" id="success-alert">
     {{ Session::get('success') }}
 </div>
 @endif
@@ -198,5 +198,20 @@
         });
     });
 
+</script>
+
+<script>
+    // Tunggu hingga DOM selesai dimuat
+    document.addEventListener("DOMContentLoaded", function () {
+        // Pilih elemen dengan ID success-alert
+        const successAlert = document.getElementById("success-alert");
+        
+        // Jika elemen ada, sembunyikan setelah 2 detik
+        if (successAlert) {
+            setTimeout(function () {
+                successAlert.style.display = "none";
+            }, 2000); // 2000 ms = 2 detik
+        }
+    });
 </script>
 @endsection

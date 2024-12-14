@@ -142,15 +142,28 @@
                     <div class="kartu">
                         <div class="left-content">
                             <div class="user">
-                                @if($row->user->image)
-                                <img src="{{ asset('storage/' . $row->user->image) }}" alt="User Image" width="35"
-                                    height="35" class="rounded-circle">
-                                @else
-                                <img class="rounded-circle" width="35"
-                                    src="https://ui-avatars.com/api/?name={{ urlencode($row->user->name) }}"
-                                    alt="User Avatar">
-                                @endif
-                                <p>by {{ $row->user->name }}</p>
+                                <div class="img">
+                                    @if($row->user->image)
+                                    <img src="{{ asset('storage/' . $row->user->image) }}" alt="User Image" width="35"
+                                        height="35" class="rounded-circle">
+                                    @else
+                                    <img class="rounded-circle" width="35"
+                                        src="https://ui-avatars.com/api/?name={{ urlencode($row->user->name) }}"
+                                        alt="User Avatar">
+                                    @endif
+                                    <p>by {{ $row->user->name }}</p>
+                                </div>
+                                <!-- <div class="dropdown">
+                                    <i class="bi bi-three-dots" href="#" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false"></i>
+
+                                    <ul class="dropdown-menu">
+                                        <li> <button class="dropdown-item" data-bs-toggle="modal"
+                                                data-bs-target="#report">
+                                                Report Postingan
+                                            </button></li>
+                                    </ul>
+                                </div> -->
                             </div>
                             <h1>{{ $row->title }}</h1>
                             <p>{{ strip_tags($row->content) }}</p>

@@ -92,14 +92,14 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Password</label>
-                                        <input type="password" name="password" class="form-control" placeholder="Password" value="{{ $user->password }}">
+                                        <input type="password" name="password" class="form-control" placeholder="Password" required>
                                     </div>
                                     <div class="form-group col-lg-12">
                                         <label>bio</label>
                                         <input type="text" name="bio" name="bio" class="form-control" value="{{ $user->bio }}">
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                <button type="submit" class="btn btn-primary">Ubah</button>
                             </form>
                         </div>
                     </div>

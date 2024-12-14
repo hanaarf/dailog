@@ -36,11 +36,11 @@
         <input type="hidden" id="is_draft" name="is_draft" value="1">
 
         <!-- Tombol untuk menyimpan sebagai post -->
-        <button type="submit" class="btn btn-primary mt-3 mb-5"
-            onclick="document.getElementById('is_draft').value='2'">Post</button>
+        <button type="submit" class="btn mt-3 mb-5"
+            onclick="document.getElementById('is_draft').value='2'" style="background-color: var(--cream); color: var(--secondary);">Post</button>
 
         <!-- Tombol untuk menyimpan sebagai draft -->
-        <button type="submit" class="btn btn-secondary mt-3 mb-5">Save as Draft</button>
+        <button type="submit" class="btn mt-3 mb-5" style="background-color: var(--secondary); color: #fff;">Save as Draft</button>
     </form>
 </div>
 @endsection

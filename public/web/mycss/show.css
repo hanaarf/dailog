@@ -70,6 +70,38 @@
   max-height: 420px;
   margin-bottom: 28px;
 }
+@media (max-width: 1200px) {
+  .main .thumbnail .img img {
+    width: 450px;
+    max-width: 551px;
+    max-height: 420px;
+    margin-bottom: 28px;
+  }
+}
+@media (max-width: 1000px) {
+  .main .thumbnail .img img {
+    width: 390px;
+    max-width: 551px;
+    max-height: 420px;
+    margin-bottom: 28px;
+  }
+}
+@media (max-width: 900px) {
+  .main .thumbnail .img img {
+    width: 340px;
+    max-width: 551px;
+    max-height: 420px;
+    margin-bottom: 28px;
+  }
+}
+@media (max-width: 800px) {
+  .main .thumbnail .img img {
+    width: 320px;
+    max-width: 551px;
+    max-height: 420px;
+    margin-bottom: 28px;
+  }
+}
 .main .thumbnail .img .act {
   display: flex;
   gap: 3px;
@@ -88,6 +120,30 @@
   cursor: pointer;
   color: #B0B0B0;
 }
+@media (max-width: 1200px) {
+  .main .thumbnail .img {
+    margin-left: 490px;
+    margin-top: 90px;
+  }
+}
+@media (max-width: 1000px) {
+  .main .thumbnail .img {
+    margin-left: 430px;
+    margin-top: 150px;
+  }
+}
+@media (max-width: 900px) {
+  .main .thumbnail .img {
+    margin-left: 400px;
+    margin-top: 150px;
+  }
+}
+@media (max-width: 800px) {
+  .main .thumbnail .img {
+    margin-left: 350px;
+    margin-top: 150px;
+  }
+}
 .main .thumbnail .judul {
   justify-content: end;
   display: flex;
@@ -105,6 +161,30 @@
 }
 .main .thumbnail .judul h1 span {
   margin-left: 5px;
+}
+@media (max-width: 1000px) {
+  .main .thumbnail .judul h1 {
+    width: 50%;
+    font-size: 26px;
+  }
+}
+@media (max-width: 900px) {
+  .main .thumbnail .judul h1 {
+    width: 80%;
+    font-size: 26px;
+  }
+}
+@media (max-width: 800px) {
+  .main .thumbnail .judul h1 {
+    width: 70%;
+    font-size: 26px;
+  }
+}
+@media (max-width: 700px) {
+  .main .thumbnail .judul h1 {
+    width: 60%;
+    font-size: 26px;
+  }
 }
 .main .thumbnail .judul p {
   margin-bottom: 7px;
@@ -130,6 +210,16 @@
 .main .thumbnail .judul .btn-copy .fa-link {
   margin-right: 8px;
 }
+@media (max-width: 1000px) {
+  .main .thumbnail .judul {
+    width: 550px;
+  }
+}
+@media (max-width: 900px) {
+  .main .thumbnail .judul {
+    width: 450px;
+  }
+}
 .main .thumbnail .judul p:nth-of-type(2) {
   font-size: 12px;
   font-weight: 300;
@@ -144,6 +234,46 @@
 }
 .main .content .isi p {
   line-height: 42px;
+}
+@media (max-width: 1200px) {
+  .main .content {
+    padding-left: 250px;
+    padding-right: 250px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
+}
+@media (max-width: 900px) {
+  .main .content {
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
+}
+@media (max-width: 800px) {
+  .main .content {
+    padding-left: 150px;
+    padding-right: 120px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
+}
+@media (max-width: 700px) {
+  .main .content {
+    padding-left: 150px;
+    padding-right: 0px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
+}
+@media (max-width: 400px) {
+  .main .content {
+    padding-left: 80px;
+    padding-right: 0px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
 }
 
 .modal-footer .input-container {
