@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Password</label>
-                                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                        <input type="password" name="password" class="form-control" placeholder="Password">
                                     </div>
                                     <div class="form-group col-lg-12">
                                         <label>bio</label>

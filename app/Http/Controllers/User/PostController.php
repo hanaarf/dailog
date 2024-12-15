@@ -70,7 +70,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         if ($post->is_draft == '1' && $post->user_id !== Auth::id()) {
-            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+            return response()->view('website.posts.abort', [], 403);
         }
         
         $comments = Comment::where('post_id', $id)->orderBy('created_at', 'desc')->get();
