@@ -165,7 +165,7 @@
 
                                                 <a href="#" onclick="confirmDelete({{ $row->post_id }})"
                                                     class="btn btn-danger shadow sharp">
-                                                   hapus report
+                                                   delete report
                                                 </a>
 
                                                 <form id="delete-form-{{ $row->post_id }}"
