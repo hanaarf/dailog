@@ -78,7 +78,7 @@ $notifications = Notification::where('to_id', auth()->id())
                                     <div class="img-prof">
                                         @if(Auth::user()->image)
                                         <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="User Image"
-                                            width="40px">
+                                            width="40px" height="40px" style=" object-fit: cover;">
                                         @else
                                         <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->username) }}"
                                             alt="User Avatar" width="40px">
