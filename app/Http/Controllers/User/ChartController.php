@@ -14,23 +14,29 @@ class ChartController extends Controller
     {
         $userId = Auth::id(); // Ambil ID user yang login
 
-        // Data untuk postingan yang sudah dipublikasikan per hari
+        // Tentukan tanggal awal dan akhir minggu aktif (Minggu ke Sabtu)
+        $startOfWeek = \Carbon\Carbon::now()->startOfWeek(\Carbon\Carbon::SUNDAY);
+        $endOfWeek = \Carbon\Carbon::now()->endOfWeek(\Carbon\Carbon::SATURDAY);
+
+        // Data untuk postingan yang sudah dipublikasikan per hari dalam minggu aktif
         $publishedPosts = Post::where('is_draft', '2')
             ->where('user_id', $userId)
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
             ->selectRaw('DAYOFWEEK(created_at) as day_of_week, COUNT(*) as total')
             ->groupBy('day_of_week')
             ->orderBy('day_of_week', 'ASC')
             ->get();
 
-        // Data untuk postingan yang masih draft per hari
+        // Data untuk postingan yang masih draft per hari dalam minggu aktif
         $draftPosts = Post::where('is_draft', '1')
             ->where('user_id', $userId)
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
             ->selectRaw('DAYOFWEEK(created_at) as day_of_week, COUNT(*) as total')
             ->groupBy('day_of_week')
             ->orderBy('day_of_week', 'ASC')
             ->get();
 
-        // Label untuk semua hari dalam seminggu
+        // Label untuk semua hari dalam minggu ini
         $days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
         // Data untuk chart
@@ -38,7 +44,7 @@ class ChartController extends Controller
         $publishedData = [];
         $draftData = [];
 
-        // Mengisi data untuk chart berdasarkan semua hari Minggu sampai Sabtu
+        // DAYOFWEEK mengembalikan 1 untuk Minggu, 2 untuk Senin, dst.
         foreach (range(1, 7) as $dayOfWeek) { // Minggu (1) sampai Sabtu (7)
             $publishedData[] = $publishedPosts->where('day_of_week', $dayOfWeek)->first()->total ?? 0;
             $draftData[] = $draftPosts->where('day_of_week', $dayOfWeek)->first()->total ?? 0;
@@ -46,5 +52,4 @@ class ChartController extends Controller
 
         return view('website.charts.index', compact('labels', 'publishedData', 'draftData'));
     }
-
 }

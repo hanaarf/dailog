@@ -19,15 +19,18 @@ class BaseController extends Controller
         $post = Post::count();
         $report = Report::count();
 
-        $postsPerWeek = Post::selectRaw('YEAR(created_at) as year, WEEK(created_at) as week, DAYOFWEEK(created_at) as day_of_week, COUNT(*) as total')
-        ->where('is_draft', '2')
-        ->groupBy('year', 'week', 'day_of_week')
-        ->orderBy('year', 'asc')
-        ->orderBy('week', 'asc')
-        ->get();
+        // Tentukan tanggal awal dan akhir minggu aktif (Minggu ke Sabtu)
+        $startOfWeek = \Carbon\Carbon::now()->startOfWeek(\Carbon\Carbon::SUNDAY);
+        $endOfWeek = \Carbon\Carbon::now()->endOfWeek(\Carbon\Carbon::SATURDAY);
 
+        // Data postingan yang sudah dipublikasikan dalam minggu aktif
+        $postsPerWeek = Post::selectRaw('DAYOFWEEK(created_at) as day_of_week, COUNT(*) as total')
+            ->where('is_draft', '2')
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->groupBy('day_of_week')
+            ->orderBy('day_of_week', 'ASC')
+            ->get();
 
         return view('dashboard.base', compact('user', 'admin', 'post', 'report', 'postsPerWeek'));
     }
-
 }

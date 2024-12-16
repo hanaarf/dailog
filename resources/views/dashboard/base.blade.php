@@ -125,51 +125,52 @@
 <script>
     const postsPerWeek = @json($postsPerWeek);
 
-const data = {
-    labels: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'], // Label sumbu X sesuai DAYOFWEEK()
-    datasets: [{
-        label: 'Jumlah Postingan',
-        data: [0, 0, 0, 0, 0, 0, 0], // Inisialisasi data 7 hari
-        borderColor: '#697565',
-        backgroundColor: '#697565',
-        fill: false,
-    }]
-};
+    // Data untuk chart
+    const data = {
+        labels: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'], // Label sumbu X
+        datasets: [{
+            label: 'Jumlah Postingan',
+            data: [0, 0, 0, 0, 0, 0, 0], // Inisialisasi data 7 hari
+            borderColor: '#697565',
+            backgroundColor: '#697565',
+            fill: false,
+        }]
+    };
 
-// Mengisi data dengan jumlah postingan per hari
-postsPerWeek.forEach(post => {
-    const dayIndex = post.day_of_week - 1; // DAYOFWEEK dimulai dari 1 (Minggu)
-    data.datasets[0].data[dayIndex] += post.total; // Tambahkan jumlah postingan pada hari yang sesuai
-});
+    // Mengisi data dengan jumlah postingan per hari
+    postsPerWeek.forEach(post => {
+        const dayIndex = post.day_of_week - 1; // DAYOFWEEK dimulai dari 1 (Minggu)
+        data.datasets[0].data[dayIndex] += post.total; // Tambahkan jumlah postingan pada hari yang sesuai
+    });
 
-const ctx = document.getElementById('activityChart').getContext('2d');
-const activityChart = new Chart(ctx, {
-    type: 'line',
-    data: data,
-    options: {
-        responsive: true,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Aktivitas Pengguna per Hari dalam Seminggu'
-            }
-        },
-        scales: {
-            x: {
+    // Render chart
+    const ctx = document.getElementById('activityChart').getContext('2d');
+    const activityChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
                 title: {
                     display: true,
-                    text: 'Hari dalam Seminggu'
+                    text: 'activity user post per week'
                 }
             },
-            y: {
-                title: {
-                    display: true,
-                    text: 'Jumlah Postingan'
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'day of week'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'count post'
+                    }
                 }
             }
         }
-    }
-});
-
+    });
 </script>
 @endsection
