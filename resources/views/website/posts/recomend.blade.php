@@ -15,7 +15,7 @@
                 <p>by {{ $row->user->name }}</p>
             </div>
             <h1>{{ $row->title }}</h1>
-            <p>{{ strip_tags($row->content) }}</p>
+            <p>{{ strip_tags(html_entity_decode($row->content)) }}</p>
         </div>
     </a>
     @endforeach
