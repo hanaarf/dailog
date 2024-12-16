@@ -55,7 +55,7 @@
                                     <li>
                                         <button class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#report-{{ $row->id }}">
-                                            Report Postingan
+                                            Report Post
                                         </button>
                                     </li>
                                 </ul>

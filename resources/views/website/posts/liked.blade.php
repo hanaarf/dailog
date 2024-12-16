@@ -48,7 +48,7 @@
 
                                 <ul class="dropdown-menu">
                                     <li> <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#report">
-                                            Report Postingan
+                                            Report Post
                                         </button></li>
                                 </ul>
                             </div>
